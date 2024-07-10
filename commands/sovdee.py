@@ -9,7 +9,7 @@ class SovdeeCog(commands.Cog):
         bot.tree.add_command(Sovdee())
 
 
-@app_commands.allowed_installs(guilds=False, users=True)
+@app_commands.allowed_installs(guilds=True, users=True)
 @app_commands.allowed_contexts(guilds=True, dms=True, private_channels=True)
 class Sovdee(app_commands.Group):
     @app_commands.command(name="global-local", description="Global vs Local variables tutorial")

@@ -8,7 +8,7 @@ class CooldownsCog(commands.Cog):
         self.bot: commands.Bot = bot
 
     @app_commands.command(description="Links to cooldown tutorial")
-    @app_commands.allowed_installs(guilds=False, users=True)
+    @app_commands.allowed_installs(guilds=True, users=True)
     @app_commands.allowed_contexts(guilds=True, dms=True, private_channels=True)
     async def cooldowns(self, interaction: discord.Interaction) -> None:
         await interaction.response.send_message(content="[Custom Cooldown Tutorial]("

@@ -43,7 +43,7 @@ This addon simplifies some of the steps of making GUIs such as listening for cli
         self.embed = embed
 
     @app_commands.command(description="Informational embed about creating GUIs")
-    @app_commands.allowed_installs(guilds=False, users=True)
+    @app_commands.allowed_installs(guilds=True, users=True)
     @app_commands.allowed_contexts(guilds=True, dms=True, private_channels=True)
     async def guis(self, interaction: discord.Interaction) -> None:
         await interaction.response.send_message(embed=self.embed)

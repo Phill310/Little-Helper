@@ -9,7 +9,7 @@ class ShaneCog(commands.Cog):
         bot.tree.add_command(Shane())
 
 
-@app_commands.allowed_installs(guilds=False, users=True)
+@app_commands.allowed_installs(guilds=True, users=True)
 @app_commands.allowed_contexts(guilds=True, dms=True, private_channels=True)
 class Shane(app_commands.Group):
     @app_commands.command(description="Link to shane's repo of skript snippets")

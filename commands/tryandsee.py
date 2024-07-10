@@ -10,7 +10,7 @@ class TryAndSeeCog(commands.Cog):
 
     @app_commands.command(name="try", description="Try it and see video")
     @app_commands.describe(member="The member you want to ping")
-    @app_commands.allowed_installs(guilds=False, users=True)
+    @app_commands.allowed_installs(guilds=True, users=True)
     @app_commands.allowed_contexts(guilds=True, dms=True, private_channels=True)
     async def tryandsee(self, interaction: discord.Interaction, member: Optional[discord.Member] = None) -> None:
         msg = "why don't you [try it and see](https://tryitands.ee)"

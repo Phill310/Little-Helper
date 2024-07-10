@@ -50,7 +50,7 @@ In this example, we would only see the `player clicked` message if the player wa
         self.embed = embed
 
     @app_commands.command(description="Informational embed about debugging")
-    @app_commands.allowed_installs(guilds=False, users=True)
+    @app_commands.allowed_installs(guilds=True, users=True)
     @app_commands.allowed_contexts(guilds=True, dms=True, private_channels=True)
     async def debug(self, interaction: discord.Interaction) -> None:
         await interaction.response.send_message(embed=self.embed)
