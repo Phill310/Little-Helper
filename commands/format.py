@@ -6,10 +6,10 @@ import discord
 class FormatCog(commands.Cog):
     def __init__(self, bot):
         self.bot: commands.Bot = bot
-        embed = discord.Embed(title="Formatting Code In Discord", color=0x00ff00)
+        embed = discord.Embed(title="Formatting Code In Discord", color=bot.embed_color)
         embed.set_footer(
-            text=bot.embedFooter,
-            icon_url=bot.embedFooterUrl
+            text=bot.embed_footer,
+            icon_url=bot.embed_footer_url
         )
         embed.add_field(
             name="Why?",

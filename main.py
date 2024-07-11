@@ -1,7 +1,6 @@
 import discord
 from discord.ext import commands
 from discord import app_commands
-from typing import Optional
 import os
 
 
@@ -26,8 +25,9 @@ class MyBot(commands.Bot):
 
 
 bot = MyBot()
-bot.embedFooter = "Send any suggestions to @the.phill"
-bot.embedFooterUrl = "https://cdn.discordapp.com/avatars/415356187161395201/569b991411c0d9096a208f58146320b8.webp"
+bot.embed_footer = "Send any suggestions to @the.phill"
+bot.embed_footer_url = "https://cdn.discordapp.com/avatars/415356187161395201/569b991411c0d9096a208f58146320b8.webp"
+bot.embed_color = 0x00ff00
 
 
 @app_commands.command(name="sync", description="Sync app commands")

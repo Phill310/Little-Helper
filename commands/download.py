@@ -1,5 +1,3 @@
-import datetime
-
 from discord import app_commands
 from discord.ext import commands
 import discord
@@ -15,10 +13,10 @@ class DownloadCog(commands.Cog):
         self.bot = bot
 
     def update_embed(self):
-        embed = discord.Embed(title="Skript Downloads", color=0x00ff00, timestamp=datetime.datetime.now())
+        embed = discord.Embed(title="Skript Downloads", color=self.bot.embed_color, timestamp=datetime.datetime.now())
         embed.set_footer(
-            text=self.bot.embedFooter,
-            icon_url=self.bot.embedFooterUrl
+            text=self.bot.embed_footer,
+            icon_url=self.bot.embed_footer_url
         )
 
         embed.add_field(
