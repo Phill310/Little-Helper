@@ -33,7 +33,7 @@ Here, the % signs are not inside strings or variable names and should therefore 
 ```vb
 broadcast "%player% has joined"
 send "%{_variable::*}%" to player
-set {_variable::%uuid of player%} to 10```
+set {variable::%uuid of player%} to 10```
 Here, the % signs are being use properly, as a means to put expressions inside strings and variable names.
 """
         embed.add_field(
