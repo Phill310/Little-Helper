@@ -1,0 +1,35 @@
+name: Bug Report
+description: Report a bug you found using skUnity's Little Helper.
+body:
+  - type: textarea
+    attributes:
+      label: Bug Description
+      description: Describe the bug you've encountered. Include as much info as you can!
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Expected Behavior
+      description: What was supposed to happen? If you're not sure, please state so.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Steps to Reproduce
+      description: |
+        What did you do to make this problem happen? Try to be as thorough as possible.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Errors or Screenshots
+      description: |
+        If the bot has sent you any weird or hidden messages (ephemeral messages) please take a picture and add it here.
+    validations:
+      required: false
+  - type: textarea
+    attributes:
+      label: Other
+      description: Have anything else to add?
+    validations:
+      required: false

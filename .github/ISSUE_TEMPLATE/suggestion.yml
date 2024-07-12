@@ -1,0 +1,22 @@
+name: Suggestion
+description: Suggest a new feature/command for skUnity's Little Helper.
+body:
+  - type: textarea
+    attributes:
+      label: Suggestion
+      description: |
+        Describe your suggestion here. Try to be as thorough as possible.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Why?
+      description: Tell me why you want to see this feature added.
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Other
+      description: Have anything else to add?
+    validations:
+      required: false
