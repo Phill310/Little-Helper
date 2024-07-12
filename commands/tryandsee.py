@@ -3,6 +3,8 @@ from discord.ext import commands
 import discord
 from typing import Optional
 
+from utils import DeleteButton
+
 
 class TryAndSeeCog(commands.Cog):
     def __init__(self, bot):
@@ -16,7 +18,7 @@ class TryAndSeeCog(commands.Cog):
         msg = "why don't you [try it and see](https://tryitands.ee)"
         if member is not None:
             msg = msg + " " + member.mention
-        await interaction.response.send_message(content=msg)
+        await interaction.response.send_message(content=msg, view=DeleteButton(interaction.user.id))
 
 
 async def setup(bot):

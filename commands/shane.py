@@ -5,6 +5,8 @@ import requests
 import json
 import datetime
 
+from utils import DeleteButton
+
 
 class ShaneCog(commands.Cog):
     def __init__(self, bot):
@@ -46,9 +48,9 @@ class Shane(app_commands.Group):
         if self.next_snippet_check < datetime.datetime.now():
             await interaction.response.defer(thinking=True)
             self.update_snippets()
-            await interaction.edit_original_response(content="[Shane's snippets" + snippet_name + "](https://github.com/ShaneBeee/SkriptSnippets/blob/master/" + snippet + ")")
+            await interaction.edit_original_response(content="[Shane's snippets" + snippet_name + "](https://github.com/ShaneBeee/SkriptSnippets/blob/master/" + snippet + ")", view=DeleteButton(interaction.user.id))
         else:
-            await interaction.response.send_message(content="[Shane's snippets" + snippet_name + "](https://github.com/ShaneBeee/SkriptSnippets/blob/master/" + snippet + ")")
+            await interaction.response.send_message(content="[Shane's snippets" + snippet_name + "](https://github.com/ShaneBeee/SkriptSnippets/blob/master/" + snippet + ")", view=DeleteButton(interaction.user.id))
 
     @snippets.autocomplete("snippet")
     async def snippets_autocomplete(self, interaction: discord.Interaction, current: str):
@@ -56,11 +58,11 @@ class Shane(app_commands.Group):
 
     @app_commands.command(description="Link to skbee's wiki")
     async def wiki(self, interaction: discord.Interaction) -> None:
-        await interaction.response.send_message(content="[Skbee's wiki](https://github.com/ShaneBeee/SkBee/wiki)")
+        await interaction.response.send_message(content="[Skbee's wiki](https://github.com/ShaneBeee/SkBee/wiki)", view=DeleteButton(interaction.user.id))
 
     @app_commands.command(description="Link to skbee's nbt heads")
     async def heads(self, interaction: discord.Interaction) -> None:
-        await interaction.response.send_message(content="[Custom NBT Heads](https://github.com/ShaneBeee/SkBee/wiki/NBT-Heads)")
+        await interaction.response.send_message(content="[Custom NBT Heads](https://github.com/ShaneBeee/SkBee/wiki/NBT-Heads)", view=DeleteButton(interaction.user.id))
 
 
 async def setup(bot):

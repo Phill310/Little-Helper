@@ -2,6 +2,8 @@ from discord import app_commands
 from discord.ext import commands
 import discord
 
+from utils import DeleteButton
+
 
 class ListsCog(commands.Cog):
     def __init__(self, bot):
@@ -60,7 +62,7 @@ set {list::%uuid of player%} to player```
     @app_commands.allowed_installs(guilds=True, users=True)
     @app_commands.allowed_contexts(guilds=True, dms=True, private_channels=True)
     async def lists(self, interaction: discord.Interaction) -> None:
-        await interaction.response.send_message(embed=self.embed)
+        await interaction.response.send_message(embed=self.embed, view=DeleteButton(interaction.user.id))
 
 
 async def setup(bot):

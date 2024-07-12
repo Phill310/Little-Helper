@@ -2,6 +2,8 @@ from discord import app_commands
 from discord.ext import commands
 import discord
 
+from utils import DeleteButton
+
 
 class GuisCog(commands.Cog):
     def __init__(self, bot):
@@ -37,7 +39,7 @@ This addon simplifies some of the steps of making GUIs such as listening for cli
         embed.add_field(
             name="Tuske",
             value="Tuske is an old addon used for creating GUIs. It has become very outdated and will break all of "
-                  "your code. If you still have this addon installed please switch to Skript-gui",
+                  "your code. If you still have this addon installed please switch to skript-gui",
             inline=False
         )
         self.embed = embed
@@ -46,7 +48,7 @@ This addon simplifies some of the steps of making GUIs such as listening for cli
     @app_commands.allowed_installs(guilds=True, users=True)
     @app_commands.allowed_contexts(guilds=True, dms=True, private_channels=True)
     async def guis(self, interaction: discord.Interaction) -> None:
-        await interaction.response.send_message(embed=self.embed)
+        await interaction.response.send_message(embed=self.embed, view=DeleteButton(interaction.user.id))
 
 
 async def setup(bot):
