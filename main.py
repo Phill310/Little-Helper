@@ -106,7 +106,7 @@ async def loadcommand(interaction: discord.Interaction, command: str) -> None:
         await interaction.response.send_message(ephemeral=True, content="You do not have permission to use this command.")
         return
     try:
-        await bot.reload_extension("commands." + command)
+        await bot.load_extension("commands." + command)
     except Exception as e:
         await interaction.response.send_message(ephemeral=True, content=f"Failed to load `{command}`: ```{e}```")
     else:
