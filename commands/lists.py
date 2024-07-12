@@ -24,7 +24,7 @@ To make a list, we simply use the list variable separator `::` in the variable's
 For example:
 ```
 set {_list::*} to 1, 2, 3, and 4
-set {_list::%uuid of player%} to player```
+set {list::%uuid of player%} to player```
 """
         embed.add_field(
             name="How to create a list variable?",
