@@ -43,6 +43,14 @@ Here, the % signs are being use properly, as a means to put expressions inside s
             value=correct_example,
             inline=False
         )
+
+        embed.add_field(
+            name="Using % in a string",
+            value="If you want to use the % character in a string such as sending the message `I am 50% done`, "
+                  "you have to escape the character. To escape a character you must put 2 of them next to each other. "
+                  "Our example would then be: ```vb\nsend \"I am 50%% done\"```",
+            inline=False
+        )
         self.embed = embed
 
     @app_commands.command(description="Informational embed about using %")
