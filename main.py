@@ -118,5 +118,4 @@ bot.tree.add_command(reloadcommand)
 bot.tree.add_command(sync)
 
 
-token = open("tokens.txt", "r")
-bot.run(token.readlines()[0])
+bot.run(os.environ['DISCORD_TOKEN'])

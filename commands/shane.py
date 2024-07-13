@@ -4,6 +4,7 @@ import discord
 import requests
 import json
 import datetime
+import os
 
 from utils import DeleteButton
 
@@ -19,7 +20,7 @@ class ShaneCog(commands.Cog):
 class Shane(app_commands.Group):
     def __init__(self):
         super().__init__()
-        self.auth = open("tokens.txt", "r").readlines()[1]
+        self.auth = os.environ['GIT_TOKEN']
         self.next_snippet_check = None
         self.snippet_list = []
         self.update_snippets()
