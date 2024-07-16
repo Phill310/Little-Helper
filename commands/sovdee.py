@@ -16,7 +16,7 @@ class SovdeeCog(commands.Cog):
 class Sovdee(app_commands.Group):
     @app_commands.command(name="global-local", description="Global vs Local variables tutorial")
     async def gvars(self, interaction: discord.Interaction) -> None:
-        await interaction.response.send_message(content="[Sovdee's Global vs Local Variable tutorial](https://sovdee.gitbook.io/skript-tutorials/core-concepts/variables/global-and-local)", view=DeleteButton(interaction.user.id))
+        await interaction.response.send_message(content="[Sovdee's Global vs Local Variable Tutorial](https://sovdee.gitbook.io/skript-tutorials/core-concepts/variables/global-and-local)", view=DeleteButton(interaction.user.id))
 
     @app_commands.command(name="variables", description="Variable tutorials")
     async def vars(self, interaction: discord.Interaction) -> None:
@@ -38,8 +38,13 @@ class Sovdee(app_commands.Group):
 
     @app_commands.command(name="vectors", description="Vector tutorials")
     async def vectors(self, interaction: discord.Interaction) -> None:
-        await interaction.response.send_message(content="[Sovdee's Vector tutorial]("
+        await interaction.response.send_message(content="[Sovdee's Vector Tutorial]("
                                                         "https://sovdee.gitbook.io/skript-tutorials/core-concepts/vectors)", view=DeleteButton(interaction.user.id))
+
+    @app_commands.command(name="functions", description="Functions tutorial")
+    async def functions(self, interaction: discord.Interaction) -> None:
+        await interaction.response.send_message(content="[Sovdee's Function Tutorial]("
+                                                        "https://sovdee.gitbook.io/skript-tutorials/core-concepts/indentation/functions)", view=DeleteButton(interaction.user.id))
 
 
 async def setup(bot):
