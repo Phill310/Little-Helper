@@ -8,7 +8,7 @@ class DeleteButton(discord.ui.View):
 
     @discord.ui.button(label="", style=discord.ButtonStyle.grey, emoji="❌")
     async def delete_button(self, interaction: discord.Interaction, button: discord.ui.Button):
-        if interaction.user.id == self.user_id:
+        if interaction.user.id in [self.user_id, interaction.client.owner_id]:
             await interaction.message.delete()
         else:
             await interaction.response.defer()
