@@ -38,7 +38,8 @@ async def sync(ctx: commands.Context, guild: str = None) -> None:
         await bot.tree.sync()
         await ctx.send(content="Synced commands globally", delete_after=3)
     else:
-        await bot.tree.sync(guild=ctx.guild)
+        my_guild = discord.Object(id=ctx.guild.id)
+        await bot.tree.sync(guild=my_guild)
         await ctx.send(content=f"Synced commands for `{ctx.guild.name}`", delete_after=3)
     await ctx.message.delete()
 
@@ -47,6 +48,8 @@ async def sync(ctx: commands.Context, guild: str = None) -> None:
 async def sync_error(ctx, error):
     if isinstance(error, commands.NotOwner):
         print(f"{ctx.author} tried to use sync!")
+    else:
+        raise error
 
 
 @bot.command()
