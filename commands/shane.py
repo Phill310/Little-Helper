@@ -23,7 +23,8 @@ class Shane(app_commands.Group):
         self.auth = os.environ['GIT_TOKEN']
         self.next_snippet_check = None
         self.snippet_list = []
-        self.update_snippets()
+        if 'DEV' not in os.environ:
+            self.update_snippets()
 
     def update_snippets(self):
         headers = {'Authorization': "Bearer " + self.auth}
