@@ -41,29 +41,48 @@ class Shane(app_commands.Group):
         self.next_snippet_check = datetime.datetime.now() + datetime.timedelta(hours=6)
 
     @app_commands.command(description="Link to shane's repo of skript snippets")
+    @app_commands.describe(reply_to="The user you want to send this message to")
     @app_commands.describe(snippet="A specific snippet to send")
-    async def snippets(self, interaction: discord.Interaction, snippet: str = "") -> None:
+    async def snippets(self, interaction: discord.Interaction, snippet: str = "", reply_to: discord.Member = None) -> None:
         snippet_name = ""
         if snippet != "":
             snippet_name = " (" + snippet[9:] + ")"
         if self.next_snippet_check < datetime.datetime.now():
             await interaction.response.defer(thinking=True)
             self.update_snippets()
-            await interaction.edit_original_response(content="[Shane's snippets" + snippet_name + "](https://github.com/ShaneBeee/SkriptSnippets/blob/master/" + snippet + ")", view=DeleteButton(interaction.user.id))
+            await interaction.edit_original_response(
+                content="Please read [Shane's snippets" + snippet_name + "](https://github.com/ShaneBeee/SkriptSnippets/blob/master/" + snippet + ") "
+                        + (reply_to.mention if reply_to is not None else ""),
+                view=DeleteButton(interaction.user.id)
+            )
         else:
-            await interaction.response.send_message(content="[Shane's snippets" + snippet_name + "](https://github.com/ShaneBeee/SkriptSnippets/blob/master/" + snippet + ")", view=DeleteButton(interaction.user.id))
+            await interaction.response.send_message(
+                content="Please read [Shane's snippets" + snippet_name + "](https://github.com/ShaneBeee/SkriptSnippets/blob/master/" + snippet + ") "
+                        + (reply_to.mention if reply_to is not None else ""),
+                view=DeleteButton(interaction.user.id)
+            )
 
     @snippets.autocomplete("snippet")
     async def snippets_autocomplete(self, interaction: discord.Interaction, current: str):
         return [snippet for snippet in self.snippet_list if snippet.name.lower().startswith(current.lower())][:25]
 
     @app_commands.command(description="Link to skbee's wiki")
-    async def wiki(self, interaction: discord.Interaction) -> None:
-        await interaction.response.send_message(content="[Skbee's wiki](https://github.com/ShaneBeee/SkBee/wiki)", view=DeleteButton(interaction.user.id))
+    @app_commands.describe(reply_to="The user you want to send this message to")
+    async def wiki(self, interaction: discord.Interaction, reply_to: discord.Member = None) -> None:
+        await interaction.response.send_message(
+            content="Please read [Skbee's wiki](https://github.com/ShaneBeee/SkBee/wiki) "
+                    + (reply_to.mention if reply_to is not None else ""),
+            view=DeleteButton(interaction.user.id)
+        )
 
     @app_commands.command(description="Link to skbee's nbt heads")
-    async def heads(self, interaction: discord.Interaction) -> None:
-        await interaction.response.send_message(content="[Custom NBT Heads](https://github.com/ShaneBeee/SkBee/wiki/NBT-Heads)", view=DeleteButton(interaction.user.id))
+    @app_commands.describe(reply_to="The user you want to send this message to")
+    async def heads(self, interaction: discord.Interaction, reply_to: discord.Member = None) -> None:
+        await interaction.response.send_message(
+            content="Please read [Custom NBT Heads](https://github.com/ShaneBeee/SkBee/wiki/NBT-Heads) "
+                    + (reply_to.mention if reply_to is not None else ""),
+            view=DeleteButton(interaction.user.id)
+        )
 
 
 async def setup(bot):

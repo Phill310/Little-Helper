@@ -40,10 +40,15 @@ class UUIDsCog(commands.Cog):
         self.embed = embed
 
     @app_commands.command(description="Informational embed about using uuids instead of player")
+    @app_commands.describe(reply_to="The user you want to send this message to")
     @app_commands.allowed_installs(guilds=True, users=True)
     @app_commands.allowed_contexts(guilds=True, dms=True, private_channels=True)
-    async def uuids(self, interaction: discord.Interaction) -> None:
-        await interaction.response.send_message(embed=self.embed, view=DeleteButton(interaction.user.id))
+    async def uuids(self, interaction: discord.Interaction, reply_to: discord.Member = None) -> None:
+        await interaction.response.send_message(
+            content=(f"Please read this embed {reply_to.mention}" if reply_to is not None else ""),
+            embed=self.embed,
+            view=DeleteButton(interaction.user.id)
+        )
 
 
 async def setup(bot):

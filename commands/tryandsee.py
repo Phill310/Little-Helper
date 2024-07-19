@@ -11,13 +11,13 @@ class TryAndSeeCog(commands.Cog):
         self.bot: commands.Bot = bot
 
     @app_commands.command(name="try", description="Try it and see video")
-    @app_commands.describe(member="The member you want to ping")
+    @app_commands.describe(reply_to="The user you want to send this message to")
     @app_commands.allowed_installs(guilds=True, users=True)
     @app_commands.allowed_contexts(guilds=True, dms=True, private_channels=True)
-    async def tryandsee(self, interaction: discord.Interaction, member: Optional[discord.Member] = None) -> None:
+    async def tryandsee(self, interaction: discord.Interaction, reply_to: Optional[discord.Member] = None) -> None:
         msg = "why don't you [try it and see](https://tryitands.ee)"
-        if member is not None:
-            msg = msg + " " + member.mention
+        if reply_to is not None:
+            msg = msg + " " + reply_to.mention
         await interaction.response.send_message(content=msg, view=DeleteButton(interaction.user.id))
 
 

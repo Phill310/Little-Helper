@@ -49,8 +49,12 @@ on chat:
     @app_commands.command(description="Informational embed about code formatting")
     @app_commands.allowed_installs(guilds=True, users=True)
     @app_commands.allowed_contexts(guilds=True, dms=True, private_channels=True)
-    async def format(self, interaction: discord.Interaction) -> None:
-        await interaction.response.send_message(embed=self.embed, view=DeleteButton(interaction.user.id))
+    async def format(self, interaction: discord.Interaction, reply_to: discord.Member = None) -> None:
+        await interaction.response.send_message(
+            content=(f"Please read this embed {reply_to.mention}" if reply_to is not None else ""),
+            embed=self.embed,
+            view=DeleteButton(interaction.user.id)
+        )
 
 
 async def setup(bot):

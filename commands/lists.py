@@ -59,10 +59,15 @@ set {list::%uuid of player%} to player```
         self.embed = embed
 
     @app_commands.command(description="Informational embed about list variables")
+    @app_commands.describe(reply_to="The user you want to send this message to")
     @app_commands.allowed_installs(guilds=True, users=True)
     @app_commands.allowed_contexts(guilds=True, dms=True, private_channels=True)
-    async def lists(self, interaction: discord.Interaction) -> None:
-        await interaction.response.send_message(embed=self.embed, view=DeleteButton(interaction.user.id))
+    async def lists(self, interaction: discord.Interaction, reply_to: discord.Member = None) -> None:
+        await interaction.response.send_message(
+            content=(f"Please read this embed {reply_to.mention}" if reply_to is not None else ""),
+            embed=self.embed,
+            view=DeleteButton(interaction.user.id)
+        )
 
 
 async def setup(bot):
