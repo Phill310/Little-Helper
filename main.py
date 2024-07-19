@@ -1,6 +1,8 @@
 import discord
 from discord.ext import commands
 import os
+import sys
+import traceback
 
 
 class MyBot(commands.Bot):
@@ -11,6 +13,11 @@ class MyBot(commands.Bot):
             help_command=None,
             owner_id=415356187161395201
         )
+        self.old_commands = dict.fromkeys(["download", "dl", "down", "downloads"], "</download:1261180973580685333>")
+        self.old_commands.update(dict.fromkeys(["%", "percent", "percents"], "</percent:1260033213204791389>"))
+        self.old_commands.update(dict.fromkeys(["format", "formatting"], "</format:1260036961910001674>"))
+        self.old_commands.update(dict.fromkeys(["list", "lists"], "</lists:1260118293419786261>"))
+        self.old_commands.update(dict.fromkeys(["uuid", "uuids"], "</uuids:1263654687022911655>"))
 
     async def setup_hook(self):
         print("Setting up commands:")
@@ -23,6 +30,14 @@ class MyBot(commands.Bot):
         print('------')
         print(f'Logged in as {self.user} (ID: {self.user.id})')
         print('------')
+
+    async def on_command_error(self, ctx, exception) -> None:
+        if isinstance(exception, commands.CommandNotFound):
+            if ctx.message.content[1:] in self.old_commands:
+                await ctx.reply(f"We have moved on to slash commands! Please use {self.old_commands[ctx.message.content[1:]]}")
+                return
+        print('Ignoring exception in command {}:'.format(ctx.command), file=sys.stderr)
+        traceback.print_exception(type(exception), exception, exception.__traceback__, file=sys.stderr)
 
 
 bot = MyBot()
