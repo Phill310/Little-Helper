@@ -47,7 +47,7 @@ class Sovde(app_commands.Group):
                                                         "https://sovdee.gitbook.io/skript-tutorials/core-concepts/indentation/functions)", view=DeleteButton(interaction.user.id))
 
     @app_commands.command(name="list-basics", description="Variable List Basics Tutorial")
-    async def functions(self, interaction: discord.Interaction) -> None:
+    async def listvars(self, interaction: discord.Interaction) -> None:
         await interaction.response.send_message(content="[Sovde's List Variable Tutorial]("
                                                         "https://sovdee.gitbook.io/skript-tutorials/core-concepts/variables/list-basics)", view=DeleteButton(interaction.user.id))    
 
