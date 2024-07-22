@@ -16,7 +16,7 @@ class SortedIndicesCog(commands.Cog):
         embed.description = ("The sorted indices expression returns a new list of indices sorted by the value of the "
                              "index. This can be very helpful for making all sorts of leaderboards. Lets say we have "
                              "the balances of our players saved in the variable `{balance::%player's uuid%}`. To "
-                             "create our leaderboard we can use```vb\nset {_sorted::*} to sorted indexes of "
+                             "create our leaderboard we can use```vb\nset {_sorted::*} to sorted indices of "
                              "{balance::*} in descending order````{_sorted::*}` will be a list of uuids with `"
                              "{_sorted::1}` being the person with the most money. If we wanted to check how much money "
                              "they had we could plug the uuid back into the original variable: `{balance::%{_sorted::1}%}`")
