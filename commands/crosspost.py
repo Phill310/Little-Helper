@@ -5,7 +5,7 @@ import discord
 from utils import DeleteButton
 
 
-class crosspostCog(commands.Cog):
+class CrossPostCog(commands.Cog):
     def __init__(self, bot):
         self.bot: commands.Bot = bot
 
@@ -23,4 +23,4 @@ class crosspostCog(commands.Cog):
 
 
 async def setup(bot):
-    await bot.add_cog(crosspostCog(bot=bot))
+    await bot.add_cog(CrossPostCog(bot=bot))

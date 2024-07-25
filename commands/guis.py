@@ -50,7 +50,11 @@ This addon simplifies some of the steps of making GUIs such as listening for cli
     @app_commands.allowed_contexts(guilds=True, dms=True, private_channels=True)
     async def guis(self, interaction: discord.Interaction, reply_to: discord.Member = None) -> None:
         await interaction.response.send_message(
-            content=(f"Please read this embed {reply_to.mention}" if reply_to is not None else ""),
+            content=self.bot.default_message.format(
+                ping="" if reply_to is None else reply_to.mention,
+                user=interaction.user.display_name,
+                message="this embed"
+            ),
             embed=self.embed,
             view=DeleteButton(interaction.user.id)
         )

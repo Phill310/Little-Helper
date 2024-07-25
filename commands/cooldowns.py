@@ -15,8 +15,11 @@ class CooldownsCog(commands.Cog):
     @app_commands.allowed_contexts(guilds=True, dms=True, private_channels=True)
     async def cooldowns(self, interaction: discord.Interaction, reply_to: discord.Member = None) -> None:
         await interaction.response.send_message(
-            content="Please read [Custom Cooldown Tutorial](https://docs.skunity.com/guides/tutorial/19354) "
-                    + (reply_to.mention if reply_to is not None else ""),
+            content=self.bot.default_message.format(
+                ping="" if reply_to is None else reply_to.mention,
+                user=interaction.user.display_name,
+                message="Please read [Custom Cooldown Tutorial](https://docs.skunity.com/guides/tutorial/19354)"
+            ),
             view=DeleteButton(interaction.user.id)
         )
 

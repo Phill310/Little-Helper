@@ -76,7 +76,11 @@ class DownloadCog(commands.Cog):
         if self.embed is None or self.next_version_check < datetime.datetime.now():
             self.update_embed()
         await interaction.response.send_message(
-            content=(f"Please read this embed {reply_to.mention}" if reply_to is not None else ""),
+            content=self.bot.default_message.format(
+                ping="" if reply_to is None else reply_to.mention,
+                user=interaction.user.display_name,
+                message="this embed"
+            ),
             embed=self.embed,
             view=DeleteButton(interaction.user.id)
         )

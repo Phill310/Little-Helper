@@ -44,6 +44,7 @@ bot = MyBot()
 bot.embed_footer = "Send any suggestions to @the.phill"
 bot.embed_footer_url = "https://cdn.discordapp.com/avatars/415356187161395201/569b991411c0d9096a208f58146320b8.webp"
 bot.embed_color = 0x00ff00
+bot.default_message = "{user} suggests that you read {message} {ping}"
 
 
 @bot.command()
