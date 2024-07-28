@@ -29,16 +29,11 @@ class Shane(app_commands.Group):
 
     def update_snippets(self):
         headers = {'Authorization': "Bearer " + self.auth}
-        snippet_data = json.loads(requests.get("https://api.github.com/repos/ShaneBeee/SkriptSnippets/contents/snippets", headers=headers).text)
+        snippet_data = json.loads(requests.get("https://api.github.com/repos/ShaneBeee/SkriptSnippets/git/trees/46ae166a31fc3a07512c3873f0adf9dcf5981eb6?recursive=1", headers=headers).text)
         snippets = []
-        for file in snippet_data:
-            if file["name"].endswith(".sk"):
-                snippets.append(app_commands.Choice(name=file["name"][:-3], value=file["path"]))
-            elif file["type"] == "dir":
-                folder_data = json.loads(requests.get("https://api.github.com/repos/ShaneBeee/SkriptSnippets/contents/" + file["path"], headers=headers).text)
-                for sub_file in folder_data:
-                    if sub_file["name"].endswith(".sk"):
-                        snippets.append(app_commands.Choice(name=sub_file["name"][:-3], value=sub_file["path"]))
+        for file in snippet_data["tree"]:
+            if file["path"].endswith(".sk"):
+                snippets.append(app_commands.Choice(name=file["path"][:-3], value="snippets/" + file["path"]))
         self.snippet_list = snippets
         self.next_snippet_check = datetime.datetime.now() + datetime.timedelta(hours=6)
 
@@ -49,7 +44,7 @@ class Shane(app_commands.Group):
         snippet_name = ""
         if snippet != "":
             snippet_name = " (" + snippet[9:] + ")"
-        if self.next_snippet_check < datetime.datetime.now():
+        if self.next_snippet_check is None or self.next_snippet_check < datetime.datetime.now():
             await interaction.response.defer(thinking=True)
             self.update_snippets()
             await interaction.edit_original_response(
@@ -72,7 +67,11 @@ class Shane(app_commands.Group):
 
     @snippets.autocomplete("snippet")
     async def snippets_autocomplete(self, interaction: discord.Interaction, current: str):
-        return [snippet for snippet in self.snippet_list if snippet.name.lower().startswith(current.lower())][:25]
+        selected = []
+        for snippet in self.snippet_list:
+            if snippet.name.lower().startswith(current.lower()) or snippet.name.lower().split("/")[-1].startswith(current.lower()):
+                selected.append(snippet)
+        return selected[:25]
 
     @app_commands.command(description="Link to SkBee's wiki")
     @app_commands.describe(reply_to="The user you want to send this message to")
