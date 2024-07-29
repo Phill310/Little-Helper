@@ -123,6 +123,17 @@ class Shane(app_commands.Group):
                 selected.append(wiki)
         return selected[:25]
 
+    @app_commands.describe(reply_to="The user you want to send this message to")
+    async def wiki(self, interaction: discord.Interaction, reply_to: discord.Member = None) -> None:
+        await interaction.response.send_message(
+            content=self.bot.default_message.format(
+                ping="" if reply_to is None else reply_to.mention,
+                user=interaction.user.display_name,
+                message="[SkBee's wiki](https://github.com/ShaneBeee/SkBee/wiki)"
+            ),
+            view=DeleteButton(interaction.user.id)
+        )
+
     @app_commands.command(description="Link to SkBee's nbt heads")
     @app_commands.describe(reply_to="The user you want to send this message to")
     async def heads(self, interaction: discord.Interaction, reply_to: discord.Member = None) -> None:
