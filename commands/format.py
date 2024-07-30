@@ -31,7 +31,8 @@ on chat:
         format_output = """
 ```vb
 on chat:
-    broadcast "This is how you format code!"```
+    broadcast "This is how you format code!"
+```
 """
         embed.add_field(
             name="How It Looks",
