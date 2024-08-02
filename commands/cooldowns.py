@@ -18,7 +18,7 @@ class CooldownsCog(commands.Cog):
             content=self.bot.default_message.format(
                 ping="" if reply_to is None else reply_to.mention,
                 user=interaction.user.display_name,
-                message="Please read [Custom Cooldown Tutorial](https://docs.skunity.com/guides/tutorial/19354)"
+                message="[Custom Cooldown Tutorial](https://docs.skunity.com/guides/tutorial/19354)"
             ),
             view=DeleteButton(interaction.user.id)
         )
