@@ -25,17 +25,14 @@ class Shane(app_commands.Group):
         self.next_wiki_check = None
         self.wiki_list = []
         self.bot = bot
-        if 'DEV' not in os.environ:
-            self.update_snippets()
-            self.update_wiki()
 
     def update_snippets(self):
         headers = {'Authorization': "Bearer " + self.auth}
-        snippet_data = requests.get("https://api.github.com/repos/ShaneBeee/SkriptSnippets/git/trees/46ae166a31fc3a07512c3873f0adf9dcf5981eb6?recursive=1", headers=headers).json()
+        snippet_data = requests.get("https://api.github.com/repos/ShaneBeee/SkriptSnippets/git/trees/master?recursive=1", headers=headers).json()
         snippets = []
         for file in snippet_data["tree"]:
             if file["path"].endswith(".sk"):
-                snippets.append(app_commands.Choice(name=file["path"][:-3], value="snippets/" + file["path"]))
+                snippets.append(app_commands.Choice(name=file["path"][9:-3], value=file["path"]))
         self.snippet_list = snippets
         self.next_snippet_check = datetime.datetime.now() + datetime.timedelta(hours=6)
 
@@ -58,29 +55,19 @@ class Shane(app_commands.Group):
         snippet_name = ""
         if snippet != "":
             snippet_name = " (" + snippet[9:] + ")"
-        if self.next_snippet_check is None or self.next_snippet_check < datetime.datetime.now():
-            await interaction.response.defer(thinking=True)
-            self.update_snippets()
-            await interaction.edit_original_response(
-                content=self.bot.default_message.format(
-                    ping="" if reply_to is None else reply_to.mention,
-                    user=interaction.user.display_name,
-                    message="[Shane's snippets" + snippet_name + "](https://github.com/ShaneBeee/SkriptSnippets/blob/master/" + snippet + ")"
-                ),
-                view=DeleteButton(interaction.user.id)
-            )
-        else:
-            await interaction.response.send_message(
-                content=self.bot.default_message.format(
-                    ping="" if reply_to is None else reply_to.mention,
-                    user=interaction.user.display_name,
-                    message="[Shane's snippets" + snippet_name + "](https://github.com/ShaneBeee/SkriptSnippets/blob/master/" + snippet + ")"
-                ),
-                view=DeleteButton(interaction.user.id)
-            )
+        await interaction.response.send_message(
+            content=self.bot.default_message.format(
+                ping="" if reply_to is None else reply_to.mention,
+                user=interaction.user.display_name,
+                message="[Shane's snippets" + snippet_name + "](https://github.com/ShaneBeee/SkriptSnippets/blob/master/" + snippet + ")"
+            ),
+            view=DeleteButton(interaction.user.id)
+        )
 
     @snippets.autocomplete("snippet")
     async def snippets_autocomplete(self, interaction: discord.Interaction, current: str):
+        if self.next_snippet_check is None or self.next_snippet_check < datetime.datetime.now():
+            self.update_snippets()
         selected = []
         for snippet in self.snippet_list:
             if snippet.name.lower().startswith(current.lower()) or snippet.name.lower().split("/")[-1].startswith(current.lower()):
@@ -94,29 +81,19 @@ class Shane(app_commands.Group):
         wiki_name = ""
         if wiki != "":
             wiki_name = " (" + wiki.replace("%E2%80%90", "") + ")"
-        if self.next_wiki_check is None or self.next_wiki_check < datetime.datetime.now():
-            await interaction.response.defer(thinking=True)
-            self.update_wiki()
-            await interaction.edit_original_response(
-                content=self.bot.default_message.format(
-                    ping="" if reply_to is None else reply_to.mention,
-                    user=interaction.user.display_name,
-                    message="[SkBee's Wiki" + wiki_name + "](https://github.com/ShaneBeee/SkBee/wiki/" + wiki + ")"
-                ),
-                view=DeleteButton(interaction.user.id)
-            )
-        else:
-            await interaction.response.send_message(
-                content=self.bot.default_message.format(
-                    ping="" if reply_to is None else reply_to.mention,
-                    user=interaction.user.display_name,
-                    message="[SkBee's Wiki" + wiki_name + "](https://github.com/ShaneBeee/SkBee/wiki/" + wiki + ")"
-                ),
-                view=DeleteButton(interaction.user.id)
-            )
+        await interaction.response.send_message(
+            content=self.bot.default_message.format(
+                ping="" if reply_to is None else reply_to.mention,
+                user=interaction.user.display_name,
+                message="[SkBee's Wiki" + wiki_name + "](https://github.com/ShaneBeee/SkBee/wiki/" + wiki + ")"
+            ),
+            view=DeleteButton(interaction.user.id)
+        )
 
     @wiki.autocomplete("wiki")
     async def wiki_autocomplete(self, interaction: discord.Interaction, current: str):
+        if self.next_wiki_check is None or self.next_wiki_check < datetime.datetime.now():
+            self.update_wiki()
         selected = []
         for wiki in self.wiki_list:
             if wiki.name.lower().startswith(current.lower()):
