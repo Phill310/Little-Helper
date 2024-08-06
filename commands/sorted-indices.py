@@ -26,10 +26,8 @@ command /baltop:
     trigger:
         set {_sorted::*} to sorted indices of {balance::*} in descending order
         send "<aqua>Baltop"
-        loop {_sorted::*}:
-            send "<gold>%loop-iteration%. <white>%offlineplayer(loop-value)% <gray>- <green>$%{balance::%loop-value%}%"
-            if loop-iteration = 10:
-                stop```
+        loop first 10 elements of {_sorted::*}:
+            send "<gold>%loop-iteration%. <white>%offlineplayer(loop-value)% <gray>- <green>$%{balance::%loop-value%}%"```
 """
         embed.add_field(
             name="Leaderboard Example",
