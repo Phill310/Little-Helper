@@ -68,6 +68,21 @@ async def sync_error(ctx, error):
         raise error
 
 
+@bot.command(aliases=["r", "reset"])
+@commands.is_owner()
+async def reload(ctx: commands.Context, command: str = None) -> None:
+    await ctx.message.delete()
+    if command is None:
+        await ctx.send("Please specify a command to reload", delete_after=3)
+    else:
+        try:
+            await bot.reload_extension(f"commands.{command}")
+        except Exception as e:
+            await ctx.send(f"Ran into an error while reloading `{command}`: ```{e}```", delete_after=30)
+        else:
+            await ctx.send(content=f"Reloaded `{command}`", delete_after=3)
+
+
 @bot.command()
 async def help(ctx) -> None:
     await ctx.reply("We have switched to slash commands! You can see all of the available commands and their descriptions by typing /")
