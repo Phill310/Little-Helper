@@ -68,9 +68,10 @@ class Shane(app_commands.Group):
     async def snippets_autocomplete(self, interaction: discord.Interaction, current: str):
         if self.next_snippet_check is None or self.next_snippet_check < datetime.datetime.now():
             self.update_snippets()
+        current = current.lower().replace(" ", "-")
         selected = []
         for snippet in self.snippet_list:
-            if snippet.name.lower().startswith(current.lower()) or snippet.name.lower().split("/")[-1].startswith(current.lower()):
+            if snippet.name.lower().startswith(current) or snippet.name.lower().split("/")[-1].startswith(current):
                 selected.append(snippet)
         return selected[:25]
 
@@ -96,7 +97,7 @@ class Shane(app_commands.Group):
             self.update_wiki()
         selected = []
         for wiki in self.wiki_list:
-            if wiki.name.lower().startswith(current.lower()):
+            if wiki.name.lower().startswith(current.lower().replace("-", " ")):
                 selected.append(wiki)
         return selected[:25]
 
