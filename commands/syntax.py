@@ -121,7 +121,7 @@ function hello():
         effect_embed.add_field(
             name="What is an effect?",
             value="Effects cause changes to your game. They are often verbs (`teleport`, `send`) and usually have "
-                  "missing parts (words surrounded in %) that you must fill in. You will only every have 1 effect per "
+                  "missing parts (words surrounded in %) that you must fill in. You will only ever have 1 effect per "
                   "line of code.",
             inline=True
         )
