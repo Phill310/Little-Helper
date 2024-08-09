@@ -51,7 +51,7 @@ on chat:
     @app_commands.command(description="Informational embed about code formatting")
     @app_commands.allowed_installs(guilds=True, users=True)
     @app_commands.allowed_contexts(guilds=True, dms=True, private_channels=True)
-    async def format(self, interaction: discord.Interaction, reply_to: discord.Member = None) -> None:
+    async def format(self, interaction: discord.Interaction, reply_to: discord.User = None) -> None:
         await interaction.response.send_message(
             content=self.bot.default_message.format(
                 ping="" if reply_to is None else reply_to.mention,

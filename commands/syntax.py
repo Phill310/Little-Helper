@@ -251,7 +251,7 @@ if size of {zombies::*} < 10:
     @app_commands.describe(reply_to="The user you want to send this message to")
     @app_commands.allowed_installs(guilds=True, users=True)
     @app_commands.allowed_contexts(guilds=True, dms=True, private_channels=True)
-    async def syntax(self, interaction: discord.Interaction, reply_to: discord.Member = None) -> None:
+    async def syntax(self, interaction: discord.Interaction, reply_to: discord.User = None) -> None:
         ids = [interaction.user.id]
         if reply_to is not None:
             ids.append(reply_to.id)

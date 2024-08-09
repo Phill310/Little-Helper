@@ -20,7 +20,7 @@ class Sovde(app_commands.Group):
 
     @app_commands.command(name="global-local", description="Global vs Local variables tutorial")
     @app_commands.describe(reply_to="The user you want to send this message to")
-    async def gvars(self, interaction: discord.Interaction, reply_to: discord.Member = None) -> None:
+    async def gvars(self, interaction: discord.Interaction, reply_to: discord.User = None) -> None:
         await interaction.response.send_message(
             content=self.bot.default_message.format(
                 ping="" if reply_to is None else reply_to.mention,
@@ -32,7 +32,7 @@ class Sovde(app_commands.Group):
 
     @app_commands.command(name="variables", description="Variable tutorials")
     @app_commands.describe(reply_to="The user you want to send this message to")
-    async def vars(self, interaction: discord.Interaction, reply_to: discord.Member = None) -> None:
+    async def vars(self, interaction: discord.Interaction, reply_to: discord.User = None) -> None:
         await interaction.response.send_message(
             content=self.bot.default_message.format(
                 ping="" if reply_to is None else reply_to.mention,
@@ -44,7 +44,7 @@ class Sovde(app_commands.Group):
 
     @app_commands.command(description="Home page of Sovde's skript tutorials")
     @app_commands.describe(reply_to="The user you want to send this message to")
-    async def home(self, interaction: discord.Interaction, reply_to: discord.Member = None) -> None:
+    async def home(self, interaction: discord.Interaction, reply_to: discord.User = None) -> None:
         await interaction.response.send_message(
             content=self.bot.default_message.format(
                 ping="" if reply_to is None else reply_to.mention,
@@ -56,7 +56,7 @@ class Sovde(app_commands.Group):
 
     @app_commands.command(name="indentation", description="Indentation and Program Flow")
     @app_commands.describe(reply_to="The user you want to send this message to")
-    async def indent(self, interaction: discord.Interaction, reply_to: discord.Member = None) -> None:
+    async def indent(self, interaction: discord.Interaction, reply_to: discord.User = None) -> None:
         await interaction.response.send_message(
             content=self.bot.default_message.format(
                 ping="" if reply_to is None else reply_to.mention,
@@ -68,7 +68,7 @@ class Sovde(app_commands.Group):
 
     @app_commands.command(name="commands", description="Custom Commands")
     @app_commands.describe(reply_to="The user you want to send this message to")
-    async def commands(self, interaction: discord.Interaction, reply_to: discord.Member = None) -> None:
+    async def commands(self, interaction: discord.Interaction, reply_to: discord.User = None) -> None:
         await interaction.response.send_message(
             content=self.bot.default_message.format(
                 ping="" if reply_to is None else reply_to.mention,
@@ -80,7 +80,7 @@ class Sovde(app_commands.Group):
 
     @app_commands.command(name="vectors", description="Vector tutorials")
     @app_commands.describe(reply_to="The user you want to send this message to")
-    async def vectors(self, interaction: discord.Interaction, reply_to: discord.Member = None) -> None:
+    async def vectors(self, interaction: discord.Interaction, reply_to: discord.User = None) -> None:
         await interaction.response.send_message(
             content=self.bot.default_message.format(
                 ping="" if reply_to is None else reply_to.mention,
@@ -92,7 +92,7 @@ class Sovde(app_commands.Group):
 
     @app_commands.command(name="functions", description="Functions tutorial")
     @app_commands.describe(reply_to="The user you want to send this message to")
-    async def functions(self, interaction: discord.Interaction, reply_to: discord.Member = None) -> None:
+    async def functions(self, interaction: discord.Interaction, reply_to: discord.User = None) -> None:
         await interaction.response.send_message(
             content=self.bot.default_message.format(
                 ping="" if reply_to is None else reply_to.mention,
@@ -104,7 +104,7 @@ class Sovde(app_commands.Group):
 
     @app_commands.command(name="list-basics", description="Variable List Basics Tutorial")
     @app_commands.describe(reply_to="The user you want to send this message to")
-    async def listvars(self, interaction: discord.Interaction, reply_to: discord.Member = None) -> None:
+    async def listvars(self, interaction: discord.Interaction, reply_to: discord.User = None) -> None:
         await interaction.response.send_message(
             content=self.bot.default_message.format(
                 ping="" if reply_to is None else reply_to.mention,

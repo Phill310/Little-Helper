@@ -57,7 +57,7 @@ Here, the % signs are being use properly, as a means to put expressions inside s
     @app_commands.describe(reply_to="The user you want to send this message to")
     @app_commands.allowed_installs(guilds=True, users=True)
     @app_commands.allowed_contexts(guilds=True, dms=True, private_channels=True)
-    async def percent(self, interaction: discord.Interaction, reply_to: discord.Member = None) -> None:
+    async def percent(self, interaction: discord.Interaction, reply_to: discord.User = None) -> None:
         await interaction.response.send_message(
             content=self.bot.default_message.format(
                 ping="" if reply_to is None else reply_to.mention,

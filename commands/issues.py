@@ -13,7 +13,7 @@ class IssuesCog(commands.Cog):
     @app_commands.describe(reply_to="The user you want to send this message to")
     @app_commands.allowed_installs(guilds=True, users=True)
     @app_commands.allowed_contexts(guilds=True, dms=True, private_channels=True)
-    async def issues(self, interaction: discord.Interaction, reply_to: discord.Member = None) -> None:
+    async def issues(self, interaction: discord.Interaction, reply_to: discord.User = None) -> None:
         await interaction.response.send_message(
             content="To report a Skript bug or make a suggestion, make a [New Issue](https://github.com/SkriptLang/Skript/issues/new/choose) "
                     + (reply_to.mention if reply_to is not None else ""),

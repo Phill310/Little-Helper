@@ -72,7 +72,7 @@ class DownloadCog(commands.Cog):
     @app_commands.describe(reply_to="The user you want to send this message to")
     @app_commands.allowed_installs(guilds=True, users=True)
     @app_commands.allowed_contexts(guilds=True, dms=True, private_channels=True)
-    async def download(self, interaction: discord.Interaction, reply_to: discord.Member = None) -> None:
+    async def download(self, interaction: discord.Interaction, reply_to: discord.User = None) -> None:
         if self.embed is None or self.next_version_check < datetime.datetime.now():
             self.update_embed()
         await interaction.response.send_message(

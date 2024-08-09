@@ -40,7 +40,7 @@ command /baltop:
     @app_commands.describe(reply_to="The user you want to send this message to")
     @app_commands.allowed_installs(guilds=True, users=True)
     @app_commands.allowed_contexts(guilds=True, dms=True, private_channels=True)
-    async def sorted_indices(self, interaction: discord.Interaction, reply_to: discord.Member = None) -> None:
+    async def sorted_indices(self, interaction: discord.Interaction, reply_to: discord.User = None) -> None:
         await interaction.response.send_message(
             content=self.bot.default_message.format(
                 ping="" if reply_to is None else reply_to.mention,

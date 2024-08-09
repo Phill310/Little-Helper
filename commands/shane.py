@@ -51,7 +51,7 @@ class Shane(app_commands.Group):
     @app_commands.command(description="Lin to shane's repo of skript snippets")
     @app_commands.describe(snippet="A specific snippet to send")
     @app_commands.describe(reply_to="The user you want to send this message to")
-    async def snippets(self, interaction: discord.Interaction, snippet: str = "", reply_to: discord.Member = None) -> None:
+    async def snippets(self, interaction: discord.Interaction, snippet: str = "", reply_to: discord.User = None) -> None:
         snippet_name = ""
         if snippet != "":
             snippet_name = " (" + snippet[9:] + ")"
@@ -78,7 +78,7 @@ class Shane(app_commands.Group):
     @app_commands.command(description="Link to SkBee's wiki")
     @app_commands.describe(wiki="A specific wiki to send")
     @app_commands.describe(reply_to="The user you want to send this message to")
-    async def wiki(self, interaction: discord.Interaction, wiki: str = "", reply_to: discord.Member = None) -> None:
+    async def wiki(self, interaction: discord.Interaction, wiki: str = "", reply_to: discord.User = None) -> None:
         wiki_name = ""
         if wiki != "":
             wiki_name = " (" + wiki.replace("%E2%80%90", "") + ")"
