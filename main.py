@@ -49,14 +49,9 @@ bot.default_message = "{user} suggests that you read {message} {ping}"
 
 @bot.command()
 @commands.is_owner()
-async def sync(ctx: commands.Context, guild: str = None) -> None:
-    if guild is None:
-        await bot.tree.sync()
-        await ctx.send(content="Synced commands globally", delete_after=3)
-    else:
-        my_guild = discord.Object(id=ctx.guild.id)
-        await bot.tree.sync(guild=my_guild)
-        await ctx.send(content=f"Synced commands for `{ctx.guild.name}`", delete_after=3)
+async def sync(ctx: commands.Context) -> None:
+    await bot.tree.sync()
+    await ctx.send(content="Synced commands globally", delete_after=3)
     await ctx.message.delete()
 
 
@@ -73,7 +68,7 @@ async def sync_error(ctx, error):
 async def reload(ctx: commands.Context, command: str = None) -> None:
     await ctx.message.delete()
     if command is None:
-        await ctx.send("Please specify a command to reload", delete_after=3)
+        await ctx.send("Please specify a command to reload:\n`" + "`, `".join(bot.extensions).replace("commands.", "") + "`", delete_after=10)
     else:
         try:
             await bot.reload_extension(f"commands.{command}")
