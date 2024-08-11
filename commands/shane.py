@@ -71,8 +71,13 @@ class Shane(app_commands.Group):
         current = current.lower().replace(" ", "-")
         selected = []
         for snippet in self.snippet_list:
-            if snippet.name.lower().startswith(current) or snippet.name.lower().split("/")[-1].startswith(current):
+            if snippet.name.lower().startswith(current):
                 selected.append(snippet)
+                continue
+            for word in snippet.name.lower().split("/"):
+                if word.startswith(current):
+                    selected.append(snippet)
+                    break
         return selected[:25]
 
     @app_commands.command(description="Link to SkBee's wiki")
@@ -99,6 +104,11 @@ class Shane(app_commands.Group):
         for wiki in self.wiki_list:
             if wiki.name.lower().startswith(current.lower().replace("-", " ")):
                 selected.append(wiki)
+                continue
+            for word in wiki.name.lower().split(" "):
+                if word.startswith(current.lower().replace("-", " ")):
+                    selected.append(wiki)
+                    break
         return selected[:25]
 
 
