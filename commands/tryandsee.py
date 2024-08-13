@@ -1,8 +1,7 @@
 from discord import app_commands
 from discord.ext import commands
 import discord
-
-from utils import DeleteButton
+import utils
 
 
 class TryAndSeeCog(commands.Cog):
@@ -14,12 +13,10 @@ class TryAndSeeCog(commands.Cog):
     @app_commands.allowed_installs(guilds=True, users=True)
     @app_commands.allowed_contexts(guilds=True, dms=True, private_channels=True)
     async def tryandsee(self, interaction: discord.Interaction, reply_to: discord.User = None) -> None:
-        msg = "Why don't you [try it and see](https://tryitands.ee)"
-        if reply_to is not None:
-            msg = msg + " " + reply_to.mention
-        await interaction.response.send_message(
-            content=msg,
-            view=DeleteButton(interaction.user.id)
+        await utils.send(
+            interaction=interaction,
+            content="Why don't you [try it and see](https://tryitands.ee)",
+            ping=reply_to
         )
 
 

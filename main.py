@@ -4,6 +4,8 @@ import os
 import sys
 import traceback
 
+import utils
+
 
 class MyBot(commands.Bot):
     def __init__(self):
@@ -69,6 +71,9 @@ async def reload(ctx: commands.Context, command: str = None) -> None:
     await ctx.message.delete()
     if command is None:
         await ctx.send("Please specify a command to reload:\n`" + "`, `".join(bot.extensions).replace("commands.", "") + "`", delete_after=10)
+    elif command.startswith("util") or command.startswith("last"):
+        utils.last_used.clear()
+        await ctx.send("Reset the last used dictionary")
     else:
         try:
             await bot.reload_extension(f"commands.{command}")
@@ -80,7 +85,7 @@ async def reload(ctx: commands.Context, command: str = None) -> None:
 
 @bot.command()
 async def help(ctx) -> None:
-    await ctx.reply("We have switched to slash commands! You can see all of the available commands and their descriptions by typing /")
+    await ctx.reply("We have switched to slash commands! You can see all of the available commands and their descriptions by typing /", mention_author=False)
 
 
 bot.run(os.environ['DISCORD_TOKEN'])

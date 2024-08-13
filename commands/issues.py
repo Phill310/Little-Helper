@@ -1,8 +1,7 @@
 from discord import app_commands
 from discord.ext import commands
 import discord
-
-from utils import DeleteButton
+import utils
 
 
 class IssuesCog(commands.Cog):
@@ -14,10 +13,10 @@ class IssuesCog(commands.Cog):
     @app_commands.allowed_installs(guilds=True, users=True)
     @app_commands.allowed_contexts(guilds=True, dms=True, private_channels=True)
     async def issues(self, interaction: discord.Interaction, reply_to: discord.User = None) -> None:
-        await interaction.response.send_message(
-            content="To report a Skript bug or make a suggestion, make a [New Issue](https://github.com/SkriptLang/Skript/issues/new/choose) "
-                    + (reply_to.mention if reply_to is not None else ""),
-            view=DeleteButton(interaction.user.id)
+        await utils.send(
+            interaction=interaction,
+            content="To report a Skript bug or make a suggestion, make a [New Issue](https://github.com/SkriptLang/Skript/issues/new/choose)",
+            ping=reply_to
         )
 
 

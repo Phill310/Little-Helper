@@ -1,8 +1,7 @@
 from discord import app_commands
 from discord.ext import commands
 import discord
-
-from utils import DeleteButton
+import utils
 
 
 class GuisCog(commands.Cog):
@@ -28,7 +27,7 @@ class GuisCog(commands.Cog):
         )
         addon = """
 Before you start making GUIs with skript-gui, you will have to download the addon [here](https://github.com/APickledWalrus/skript-gui/releases/latest)
-Once you are ready to begin, [Click Here](https://https://github.com/APickledWalrus/skript-gui/wiki/1.-Creating-your-first-GUI) to get started!
+Once you are ready to begin, [Click Here](https://github.com/APickledWalrus/skript-gui/wiki/1.-Creating-your-first-GUI) to get started!
 This addon simplifies some of the steps of making GUIs such as listening for clicks
 """
         embed.add_field(
@@ -49,14 +48,10 @@ This addon simplifies some of the steps of making GUIs such as listening for cli
     @app_commands.allowed_installs(guilds=True, users=True)
     @app_commands.allowed_contexts(guilds=True, dms=True, private_channels=True)
     async def guis(self, interaction: discord.Interaction, reply_to: discord.User = None) -> None:
-        await interaction.response.send_message(
-            content=self.bot.default_message.format(
-                ping="" if reply_to is None else reply_to.mention,
-                user=interaction.user.display_name,
-                message="this embed"
-            ),
+        await utils.send(
+            interaction=interaction,
             embed=self.embed,
-            view=DeleteButton(interaction.user.id)
+            ping=reply_to
         )
 
 

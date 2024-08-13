@@ -1,8 +1,7 @@
 from discord import app_commands
 from discord.ext import commands
 import discord
-
-from utils import DeleteButton
+import utils
 
 
 class CrossPostCog(commands.Cog):
@@ -19,7 +18,10 @@ class CrossPostCog(commands.Cog):
             msg = msg + " " + reply_to.mention
         msg += (". We have multiple channels to make sure that everyone's questions can be seen. Please pick one "
                 "channel to ask your question in and then wait for someone to assist you.")
-        await interaction.response.send_message(content=msg, view=DeleteButton(interaction.user.id))
+        await utils.send(
+            interaction=interaction,
+            content=msg
+        )
 
 
 async def setup(bot):

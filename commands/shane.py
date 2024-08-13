@@ -4,8 +4,7 @@ import discord
 import requests
 import datetime
 import os
-
-from utils import DeleteButton
+import utils
 
 
 class ShaneCog(commands.Cog):
@@ -55,13 +54,10 @@ class Shane(app_commands.Group):
         snippet_name = ""
         if snippet != "":
             snippet_name = " (" + snippet[9:] + ")"
-        await interaction.response.send_message(
-            content=self.bot.default_message.format(
-                ping="" if reply_to is None else reply_to.mention,
-                user=interaction.user.display_name,
-                message="[Shane's snippets" + snippet_name + "](https://github.com/ShaneBeee/SkriptSnippets/blob/master/" + snippet + ")"
-            ),
-            view=DeleteButton(interaction.user.id)
+        await utils.send(
+            interaction=interaction,
+            message="[Shane's snippets" + snippet_name + "](https://github.com/ShaneBeee/SkriptSnippets/blob/master/" + snippet + ")",
+            ping=reply_to
         )
 
     @snippets.autocomplete("snippet")
@@ -87,13 +83,10 @@ class Shane(app_commands.Group):
         wiki_name = ""
         if wiki != "":
             wiki_name = " (" + wiki.replace("%E2%80%90", "") + ")"
-        await interaction.response.send_message(
-            content=self.bot.default_message.format(
-                ping="" if reply_to is None else reply_to.mention,
-                user=interaction.user.display_name,
-                message="[SkBee's Wiki" + wiki_name + "](https://github.com/ShaneBeee/SkBee/wiki/" + wiki + ")"
-            ),
-            view=DeleteButton(interaction.user.id)
+        await utils.send(
+            interaction=interaction,
+            message="[SkBee's Wiki" + wiki_name + "](https://github.com/ShaneBeee/SkBee/wiki/" + wiki + ")",
+            ping=reply_to
         )
 
     @wiki.autocomplete("wiki")

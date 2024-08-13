@@ -1,7 +1,7 @@
 from discord import app_commands
 from discord.ext import commands
 import discord
-from utils import DeleteButton
+import utils
 
 
 class UUIDsCog(commands.Cog):
@@ -44,14 +44,10 @@ class UUIDsCog(commands.Cog):
     @app_commands.allowed_installs(guilds=True, users=True)
     @app_commands.allowed_contexts(guilds=True, dms=True, private_channels=True)
     async def uuids(self, interaction: discord.Interaction, reply_to: discord.User = None) -> None:
-        await interaction.response.send_message(
-            content=self.bot.default_message.format(
-                ping="" if reply_to is None else reply_to.mention,
-                user=interaction.user.display_name,
-                message="this embed"
-            ),
+        await utils.send(
+            interaction=interaction,
             embed=self.embed,
-            view=DeleteButton(interaction.user.id)
+            ping=reply_to
         )
 
 

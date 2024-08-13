@@ -1,6 +1,7 @@
 from discord import app_commands
 from discord.ext import commands
 import discord
+import utils
 
 
 class SyntaxPages(discord.ui.View):
@@ -255,14 +256,11 @@ if size of {zombies::*} < 10:
         ids = [interaction.user.id]
         if reply_to is not None:
             ids.append(reply_to.id)
-        await interaction.response.send_message(
-            content=self.bot.default_message.format(
-                ping="" if reply_to is None else reply_to.mention,
-                user=interaction.user.display_name,
-                message="this embed"
-            ),
+        await utils.send(
+            interaction=interaction,
             embed=self.embeds["Structure"],
-            view=SyntaxPages(self.bot, ids, self.embeds))
+            view=SyntaxPages(self.bot, ids, self.embeds)
+        )
 
 
 async def setup(bot):

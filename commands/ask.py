@@ -1,8 +1,7 @@
 from discord import app_commands
 from discord.ext import commands
 import discord
-
-from utils import DeleteButton
+import utils
 
 
 class AskCog(commands.Cog):
@@ -14,10 +13,10 @@ class AskCog(commands.Cog):
     @app_commands.allowed_installs(guilds=True, users=True)
     @app_commands.allowed_contexts(guilds=True, dms=True, private_channels=True)
     async def ask(self, interaction: discord.Interaction, reply_to: discord.User = None) -> None:
-        await interaction.response.send_message(
-            content="[Don't ask to ask](https://dontasktoask.com) "
-                    + (reply_to.mention if reply_to is not None else ""),
-            view=DeleteButton(interaction.user.id)
+        await utils.send(
+            interaction=interaction,
+            content="[Don't ask to ask](https://dontasktoask.com) ",
+            ping=reply_to
         )
 
 

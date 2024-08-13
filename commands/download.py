@@ -4,8 +4,7 @@ import discord
 import requests
 import json
 import datetime
-
-from utils import DeleteButton
+import utils
 
 
 class DownloadCog(commands.Cog):
@@ -75,14 +74,10 @@ class DownloadCog(commands.Cog):
     async def download(self, interaction: discord.Interaction, reply_to: discord.User = None) -> None:
         if self.embed is None or self.next_version_check < datetime.datetime.now():
             self.update_embed()
-        await interaction.response.send_message(
-            content=self.bot.default_message.format(
-                ping="" if reply_to is None else reply_to.mention,
-                user=interaction.user.display_name,
-                message="this embed"
-            ),
+        await utils.send(
+            interaction=interaction,
             embed=self.embed,
-            view=DeleteButton(interaction.user.id)
+            ping=reply_to
         )
 
 
