@@ -1,5 +1,7 @@
 import discord
 import time
+import sys
+import traceback
 
 
 class DeleteButton(discord.ui.View):
@@ -64,3 +66,8 @@ async def send(interaction: discord.Interaction, content: str = None, message: s
         )
     if len(last_used) >= 50:
         last_used.clear()
+
+
+def print_error(ctx, exception: Exception):
+    print('Ignoring exception in command {}:'.format(ctx.command), file=sys.stderr)
+    traceback.print_exception(type(exception), exception, exception.__traceback__, file=sys.stderr)

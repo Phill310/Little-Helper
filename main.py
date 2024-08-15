@@ -1,9 +1,6 @@
 import discord
 from discord.ext import commands
 import os
-import sys
-import traceback
-
 import utils
 
 
@@ -38,8 +35,7 @@ class MyBot(commands.Bot):
             if ctx.message.content[1:] in self.old_commands:
                 await ctx.reply(f"We have moved on to slash commands! Please use {self.old_commands[ctx.message.content[1:]]}")
                 return
-        print('Ignoring exception in command {}:'.format(ctx.command), file=sys.stderr)
-        traceback.print_exception(type(exception), exception, exception.__traceback__, file=sys.stderr)
+        utils.print_error(ctx, exception)
 
 
 bot = MyBot()
@@ -62,7 +58,7 @@ async def sync_error(ctx, error):
     if isinstance(error, commands.NotOwner):
         print(f"{ctx.author} tried to use sync!")
     else:
-        raise error
+        utils.print_error(ctx, error)
 
 
 @bot.command(aliases=["r", "reset"])
