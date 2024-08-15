@@ -35,7 +35,7 @@ class EscapeCog(commands.Cog):
         await utils.send(
             interaction=interaction,
             embed=self.embed,
-            ping=reply_to.mention
+            ping=reply_to
         )
 
 
