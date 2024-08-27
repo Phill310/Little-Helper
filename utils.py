@@ -44,12 +44,12 @@ async def send(interaction: discord.Interaction, content: str = None, message: s
     else:
         content = content + " " + ping
     if not ephemeral:
-        if (interaction.channel.id in last_used) and (last_used[interaction.channel.id] + 10 > time.time()):
+        if (str(interaction.channel.id) + interaction.command.name in last_used) and (last_used[str(interaction.channel.id) + interaction.command.name] + 10 > time.time()):
             ephemeral = True
             view = discord.ui.View()
             content = "**Your message was hidden because someone requested it recently**\n\n" + content
         else:
-            last_used[interaction.channel.id] = round(time.time())
+            last_used[str(interaction.channel.id) + interaction.command.name] = round(time.time())
     if deferred:
         await interaction.followup.send(
             content=content,
