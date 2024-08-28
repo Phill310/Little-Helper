@@ -75,7 +75,7 @@ class AddonCog(commands.Cog):
         selected = []
         current = current.lower().replace(" ", "-")
         for addon in self.addon_choices:
-            if addon.name.lower().startswith(current) or addon.name.lower().split("-")[-1].startswith(current):
+            if addon.name.lower().startswith(current):
                 selected.append(addon)
                 continue
             for word in addon.name.lower().split("-"):
