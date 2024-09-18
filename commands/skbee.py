@@ -17,8 +17,7 @@ class SkBeeCog(commands.Cog):
         await interaction.response.send_message(
             content=ping + "SkBee has been discontinued by its owner. Other addons or forks may exist or be made to "
                            "replace it. In the meantime, the latest SkBee jar is attached below and documentation can "
-                           "be found [here](https://web.archive.org/web/20240405064337/https://skripthub.net/docs"
-                           "/?addon=SkBee)",
+                           "be found [here](https://web.archive.org/web/20240913065946/https://skripthub.net/docs/)",
             file=file
         )
 
