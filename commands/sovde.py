@@ -31,7 +31,16 @@ class Sovde(app_commands.Group):
     async def vars(self, interaction: discord.Interaction, reply_to: discord.User = None) -> None:
         await utils.send(
             interaction=interaction,
-            message="[Sovde's Variable Tutorial](https://sovdee.gitbook.io/skript-tutorials/core-concepts/variables)",
+            message="[Sovde's Variable Tutorials](https://sovdee.gitbook.io/skript-tutorials/core-concepts/variables)",
+            ping=reply_to
+        )
+
+    @app_commands.command(name="memory-variables", description="Memory variable tutorial")
+    @app_commands.describe(reply_to="The user you want to send this message to")
+    async def ram_vars(self, interaction: discord.Interaction, reply_to: discord.User = None) -> None:
+        await utils.send(
+            interaction=interaction,
+            message="[Sovde's Memory Variable Tutorial](https://sovdee.gitbook.io/skript-tutorials/core-concepts/variables/memory-variables-metadata-and-alternatives)",
             ping=reply_to
         )
 
