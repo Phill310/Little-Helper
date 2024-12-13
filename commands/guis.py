@@ -14,8 +14,8 @@ class GuisCog(commands.Cog):
         )
         embed.add_field(
             name="What are GUIs?",
-            value="GUIs are custom inventories that you can use from all sorts of purposes including shops and server "
-                  "selectors. There are two main ways to create them, using normal Skript and using the addon ["
+            value="GUIs are custom inventories that you can use for all sorts of purposes including shops and server "
+                  "selectors. There are two main ways to create them: using normal Skript and using the addon ["
                   "skript-gui](https://github.com/APickledWalrus/skript-gui)",
             inline=False
         )
