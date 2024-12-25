@@ -14,56 +14,66 @@ class DownloadCog(commands.Cog):
         self.bot = bot
 
     def update_embed(self):
-        embed = discord.Embed(title="Skript Downloads", color=self.bot.embed_color, timestamp=datetime.datetime.now())
+        embed = discord.Embed(title="", color=self.bot.embed_color, timestamp=datetime.datetime.now())
         embed.set_footer(
-            text=self.bot.embed_footer,
+            text="Embed designed by jakegblp",
             icon_url=self.bot.embed_footer_url
-        )
-
-        embed.add_field(
-            name="Official SkriptLang Releases:",
-            value="-# These are the recommended versions of Skript",
-            inline=False
-        )
-
-        embed.add_field(
-            name="Minecraft 1.9-1.12.2",
-            value="Final Stable Release: [Skript 2.6.4](https://github.com/SkriptLang/Skript/releases/tag/2.6.4)",
-            inline=False
         )
 
         latest_data = json.loads(requests.get("https://api.github.com/repos/SkriptLang/Skript/releases/latest").text)
         latest_version = latest_data["tag_name"]
-        latest_unstable_data = json.loads(requests.get("https://api.github.com/repos/SkriptLang/Skript/releases").text)[0]
-        latest_unstable_version = latest_unstable_data["tag_name"]
-        latest = "Latest Stable Release: [Skript " + latest_version + "](" + latest_data["html_url"] + ")"
-        if latest_unstable_version != latest_version:
-            latest = latest + "\nLatest Experimental Release: [Skript " + latest_unstable_version + "](" + latest_unstable_data["html_url"] + ")"
-        embed.add_field(
-            name="Minecraft 1.13+",
-            value=latest,
-            inline=False
-        )
-
-        embed.add_field(
-            name="\u200B",
-            value="\u200B",
-            inline=False
-        )
-
-        embed.add_field(
-            name="Unofficial Releases:",
-            value="-# These versions are not supported by SkriptLang",
-            inline=False
-        )
+        latest_releases = json.loads(requests.get("https://api.github.com/repos/SkriptLang/Skript/releases").text)[:10]
+        latest_unstable_data = 0
+        latest_unstable_version = 0
+        highest_version_split = 0
+        for release in latest_releases:
+            if latest_unstable_data == 0:
+                latest_unstable_data = release
+                latest_unstable_version = release["tag_name"]
+                highest_version_split = release["tag_name"].split("-")[0].split(".")
+            else:
+                current_version = release["tag_name"].split("-")[0].split(".")
+                for i in range(3):
+                    if int(current_version[i]) > int(highest_version_split[i]):
+                        latest_unstable_data = release
+                        latest_unstable_version = release["tag_name"]
+                        highest_version_split = release["tag_name"].split("-")[0].split(".")
+                        break
+                    elif int(current_version[i]) < int(highest_version_split[i]):
+                        break
+        latest = "> Minecraft **1.13+**: [Skript " + latest_version + "](" + latest_data["html_url"] + ")"
+        if latest_unstable_version != 0 and latest_unstable_version != latest_version:
+            latest += "\n### Latest Beta:\n> Not recommended for production servers: [Skript " + latest_unstable_version + "](" + latest_unstable_data[
+                "html_url"] + ")"
 
         mato_data = json.loads(requests.get("https://api.github.com/repos/Matocolotoe/Skript-1.8/releases/latest").text)
         mato_version = mato_data["tag_name"]
-        embed.add_field(
-            name="Minecraft 1.8.x",
-            value="Recommended but **not supported**:\n[Matocolotoe fork, " + mato_version + "](" + mato_data["html_url"] + ")",
-            inline=False
-        )
+
+        embed.description = f"""
+**Official SkriptLang Releases:**
+- **Minecraft 1.9-1.12.2**
+\tFinal Stable Release: [Skript 2.6.4](https://github.com/SkriptLang/Skript/releases/tag/2.6.4)
+- **Minecraft 1.13+**
+\t{latest}
+
+**Unofficial Releases:**
+- **Minecraft 1.8.x** 
+\tRecommended but **not supported**: [Matocolotoe fork {mato_version}]({mato_data["html_url"]})
+-# These versions are not supported by SkriptLang
+-# Do not expect to get help in this server
+"""
+        embed.description = f"""
+# Skript Downloads
+These are the recommended versions of Skript:
+### Latest Release:
+{latest}
+### Older Releases:
+> Minecraft **1.9** - **1.12.2**: [Skript 2.6.4](https://github.com/SkriptLang/Skript/releases/tag/2.6.4)
+
+### Unofficial Releases:
+> Minecraft **1.8.x**: [Matocolotoe fork {mato_version}]({mato_data["html_url"]})
+-# These versions are not supported by SkriptLang
+"""
         self.embed = embed
         self.next_version_check = datetime.datetime.now() + datetime.timedelta(hours=4)
 
