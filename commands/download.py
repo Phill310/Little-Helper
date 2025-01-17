@@ -41,7 +41,7 @@ class DownloadCog(commands.Cog):
                         break
                     elif int(current_version[i]) < int(highest_version_split[i]):
                         break
-        latest = "> Minecraft **1.13+**: [Skript " + latest_version + "](" + latest_data["html_url"] + ")"
+        latest = "> Minecraft **1.19.4+**: [Skript " + latest_version + "](" + latest_data["html_url"] + ")"
         if latest_unstable_version != 0 and latest_unstable_version != latest_version:
             latest += "\n### Latest Beta:\n> Not recommended for production servers: [Skript " + latest_unstable_version + "](" + latest_unstable_data[
                 "html_url"] + ")"
@@ -50,25 +50,13 @@ class DownloadCog(commands.Cog):
         mato_version = mato_data["tag_name"]
 
         embed.description = f"""
-**Official SkriptLang Releases:**
-- **Minecraft 1.9-1.12.2**
-\tFinal Stable Release: [Skript 2.6.4](https://github.com/SkriptLang/Skript/releases/tag/2.6.4)
-- **Minecraft 1.13+**
-\t{latest}
-
-**Unofficial Releases:**
-- **Minecraft 1.8.x** 
-\tRecommended but **not supported**: [Matocolotoe fork {mato_version}]({mato_data["html_url"]})
--# These versions are not supported by SkriptLang
--# Do not expect to get help in this server
-"""
-        embed.description = f"""
 # Skript Downloads
 These are the recommended versions of Skript:
 ### Latest Release:
 {latest}
 ### Older Releases:
 > Minecraft **1.9** - **1.12.2**: [Skript 2.6.4](https://github.com/SkriptLang/Skript/releases/tag/2.6.4)
+> Minecraft **1.13** - **1.19.3**: [Skript 2.9.5](https://github.com/SkriptLang/Skript/releases/tag/2.9.5)
 
 ### Unofficial Releases:
 > Minecraft **1.8.x**: [Matocolotoe fork {mato_version}]({mato_data["html_url"]})
