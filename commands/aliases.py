@@ -31,7 +31,7 @@ class AliasesCog(commands.Cog):
 
         tags_example = """
 To replace category aliases like `is a sword` you can use the new [is tagged](https://docs.skriptlang.org/conditions.html?search=#CondIsTagged) condition.
-`if player's tool is a sword:` becomes `is player's tool is tagged as item tag "swords":`
+`if player's tool is a sword:` becomes `if player's tool is tagged as item tag "swords":`
 
 This doesn't work in events yet so you can check the tag inside the event:
 `on click with any pickaxe:` becomes ```vb
