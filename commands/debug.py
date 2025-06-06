@@ -48,6 +48,11 @@ In this example, we would only see the `player clicked` message if the player wa
             value=condition_example,
             inline=False
         )
+        embed.add_field(
+            name="NBT",
+            value="If you are debugging nbt you can use `send pretty nbt of nbt of player's tool with split " "` to make it more readable.",
+            inline=False
+        )
         self.embed = embed
 
     @app_commands.command(description="Informational embed about debugging")
