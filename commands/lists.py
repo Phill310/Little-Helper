@@ -57,7 +57,7 @@ set {list::%uuid of player%} to player```
         )
         self.embed = embed
 
-    @app_commands.command(description="Informational embed about list variables")
+    @app_commands.command(description="Informational embed about switching from . variables to list variables")
     @app_commands.describe(reply_to="The user you want to send this message to")
     @app_commands.allowed_installs(guilds=True, users=True)
     @app_commands.allowed_contexts(guilds=True, dms=True, private_channels=True)
