@@ -8,7 +8,7 @@ class HideAttributesCog(commands.Cog):
     def __init__(self, bot):
         self.bot: commands.Bot = bot
 
-    @app_commands.command(description="Explain that the attribute itemflag doesn't work on 1.20.5+")
+    @app_commands.command(description="Explain that the attribute itemflag doesn't work on 1.20.5-1.21.4")
     @app_commands.describe(reply_to="The user you want to send this message to")
     @app_commands.allowed_installs(guilds=True, users=True)
     @app_commands.allowed_contexts(guilds=True, dms=True, private_channels=True)
