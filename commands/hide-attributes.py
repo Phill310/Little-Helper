@@ -15,10 +15,10 @@ class HideAttributesCog(commands.Cog):
     async def hide_attributes(self, interaction: discord.Interaction, reply_to: discord.User = None) -> None:
         await utils.send(
             interaction=interaction,
-            content="If you are playing on Minecraft 1.20.5+ the hide attributes itemflag will not work because "
+            content="If you are playing on Minecraft 1.20.5-1.21.4 the hide attributes item flag will not work because "
                     "this behavior is now handled by the attributes themselves. You can use [this method]"
                     "(<https://github.com/ShaneBeee/SkBee/wiki/Tricks-Hide-Attribute-Modifiers>) to hide default "
-                    "attributes now",
+                    "attributes on these versions. You can also update to 1.21.5+ to use the hide attributes flag",
             ping=reply_to
         )
 
