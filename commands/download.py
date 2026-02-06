@@ -12,7 +12,6 @@ class DownloadCog(commands.Cog):
         self.next_version_check = None
         self.embed = None
         self.bot = bot
-        self.update_embed()
 
     def get_date_18_month_ago(self, date: datetime):
         month = date.month
@@ -47,7 +46,6 @@ class DownloadCog(commands.Cog):
         for release in latest_releases:
             if not latest_feature and release["tag_name"].split(".")[-1] == "0":
                 latest_feature = datetime.fromisoformat(release["published_at"])
-                print("using", release["tag_name"], "version:", latest_feature)
                 break
 
         minecraft_releases = [release for release in json.loads(requests.get("https://piston-meta.mojang.com/mc/game/version_manifest.json").text)["versions"] if release["type"] == "release"]
