@@ -13,10 +13,10 @@ class PlaceholdersCog(commands.Cog):
             icon_url=bot.embed_footer_url
         )
         embed.description = \
-            ("Skript does not support placeholders (from plugins such as Papi) on its own. This means that doing "
+            ("Skript does not support placeholders (from plugins such as PlaceholderAPI) on its own. This means that doing "
              "something like `send \"%luckperms_prefix%\"` will give you an error. You can either find syntax that "
-             "skript supports (`player's prefix` in this example) or you can use an addon such as ["
-             "Skript-Placeholders](https://github.com/APickledWalrus/skript-placeholders).")
+             "Skript supports (`player's prefix` in this example) or you can use an addon such as ["
+             "skript-placeholders](https://github.com/APickledWalrus/skript-placeholders).")
 
         example = """
 ```vb
