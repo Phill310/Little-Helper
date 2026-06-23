@@ -7,7 +7,7 @@ import utils
 class MyBot(commands.Bot):
     def __init__(self):
         super().__init__(
-            intents=discord.Intents.all(),
+            intents=discord.Intents.default(),
             command_prefix=".",
             help_command=None,
             owner_id=415356187161395201
