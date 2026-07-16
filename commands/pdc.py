@@ -18,14 +18,29 @@ class PdcCog(commands.Cog):
                   "and worlds. Think of one as a sticky note on the object itself: put a number on a sword and it "
                   "keeps that number when you drop it or move it between inventories. That makes them the best option "
                   "for item data, since items have no id you can use in a normal variable. They need Skript 2.15 or "
-                  "newer.",
+                  "a newer version.",
             inline=False
         )
+        usage = """
+Every tag needs a key written as `namespace:key-name`. Once you have one you can set it and read it back:
+```vb
+set data tag "myserver:level" of player to 5
+set {_level} to data tag "myserver:level" of player```
+**[Click Here](https://beta-docs.skriptlang.org/scripting/pdc/) to get started**
+"""
         embed.add_field(
             name="How to use them",
-            value="Every tag needs a key written as `namespace:key-name`, and then you can set it with `set data tag "
-                  "\"myserver:level\" of player to 5` and read it back with `data tag \"myserver:level\" of player`. "
-                  "[Click Here](https://beta-docs.skriptlang.org/scripting/pdc/) to get started",
+            value=usage,
+            inline=False
+        )
+        syntax = """
+- [Persistent Data Value](https://beta-docs.skriptlang.org/syntaxes/?search=%23ExprPersistentData): get, set and delete a tag.
+- [Has Persistent Data Tag](https://beta-docs.skriptlang.org/syntaxes/?search=%23CondHasPersistentDataTag): check whether an object has one.
+- [All Persistent Data Keys](https://beta-docs.skriptlang.org/syntaxes/?search=%23ExprAllPersistentDataKeys): every key stored on an object.
+"""
+        embed.add_field(
+            name="Syntax",
+            value=syntax,
             inline=False
         )
         embed.add_field(
